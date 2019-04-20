@@ -4,8 +4,7 @@ var vm = new Vue({
         tamanho: 0,
         campo: {},
         qtdBombas: 0,
-        tempLinha: 0,
-        tempColuna: 0
+        dificuldade: ''
     },
     computed: {
 
@@ -25,6 +24,7 @@ var vm = new Vue({
 
             $('td').html(' ');
             $('td').removeClass('agua');
+            $('td').removeClass('clicado');
             $('td').removeClass('bomba');
             $('td').removeAttr('qtd');
 
@@ -83,15 +83,29 @@ var vm = new Vue({
 
         },
         varrerAoRedor: function (linha, coluna) {
-            obj = {}
+            obj = {};
             linha = Number(linha);
             coluna = Number(coluna);
 
+            if (linha > 0 && coluna > 0) {
+                if (vm.campo[linha - 1][coluna - 1].clicado === 'N') {
+                    obj[1] = {};
+                    obj[1].linha = linha - 1;
+                    obj[1].coluna = coluna - 1;
+                }
+            }
             if (linha > 0) {
                 if (vm.campo[linha - 1][coluna].clicado === 'N') {
                     obj[2] = {};
                     obj[2].linha = linha - 1;
                     obj[2].coluna = coluna;
+                }
+            }
+            if (linha > 0 && coluna < vm.tamanho - 1) {
+                if (vm.campo[linha - 1][coluna + 1].clicado === 'N') {
+                    obj[3] = {};
+                    obj[3].linha = linha - 1;
+                    obj[3].coluna = coluna + 1;
                 }
             }
             if (coluna > 0) {
@@ -108,6 +122,13 @@ var vm = new Vue({
                     obj[5].coluna = coluna + 1;
                 }
             }
+            if (linha < vm.tamanho - 1 && coluna > 0) {
+                if (vm.campo[linha + 1][coluna - 1].clicado === 'N') {
+                    obj[6] = {};
+                    obj[6].linha = linha + 1;
+                    obj[6].coluna = coluna - 1;
+                }
+            }
             if (linha < vm.tamanho - 1) {
                 if (vm.campo[linha + 1][coluna].clicado === 'N') {
                     obj[7] = {};
@@ -115,11 +136,18 @@ var vm = new Vue({
                     obj[7].coluna = coluna;
                 }
             }
+            if (linha < vm.tamanho - 1 && coluna < vm.tamanho - 1) {
+                if (vm.campo[linha + 1][coluna + 1].clicado === 'N') {
+                    obj[8] = {};
+                    obj[8].linha = linha + 1;
+                    obj[8].coluna = coluna + 1;
+                }
+            }
 
             return obj;
         },
-        verificar: function(linha,coluna){
-            verificar(linha,coluna);
+        verificar: function (linha, coluna) {
+            verificar(linha, coluna);
         },
         clicado: function (linha, coluna) {
             if (this.campo[linha][coluna].clicado === 'S') {
@@ -132,6 +160,7 @@ var vm = new Vue({
 });
 
 function verificar(linha, coluna) {
+    console.log(linha+' '+coluna);
     if (vm.campo[linha][coluna].bomba === 'S') {
         $('[linha=' + linha + '][coluna=' + coluna + ']').addClass('bomba');
         setTimeout(1000);
@@ -142,6 +171,7 @@ function verificar(linha, coluna) {
             return false;
         } else {
             vm.campo[linha][coluna].clicado = 'S';
+            $('[linha=' + linha + '][coluna=' + coluna + ']').addClass('clicado');
             if (vm.campo[linha][coluna].bombaLado === 0) {
                 $('[linha=' + linha + '][coluna=' + coluna + ']').addClass('agua');
                 var obj = vm.varrerAoRedor(linha, coluna);
@@ -152,6 +182,7 @@ function verificar(linha, coluna) {
                 }
             } else {
                 $('[linha=' + linha + '][coluna=' + coluna + ']').html(vm.campo[linha][coluna].bombaLado);
+                $('[linha=' + linha + '][coluna=' + coluna + ']').attr('bomba-ao-redor', vm.campo[linha][coluna].bombaLado);
             }
         }
     }

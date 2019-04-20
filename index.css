@@ -1,0 +1,46 @@
+td{
+    border: 2px outset;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    cursor: pointer;
+    background-color: greenyellow;
+    font-weight: bold
+}
+td[bomba-ao-redor='2']{
+    color: blue;
+}
+td[bomba-ao-redor='3']{
+    color: orange;
+}
+td[bomba-ao-redor='4'], td[bomba-ao-redor='5'], td[bomba-ao-redor='6']{
+    color: red;
+}
+.agua{
+    background-color: #00bbff !important;
+    border: 1px inset  !important;
+    border-color: #0197ce !important;
+}
+.bomba{
+    background: url(https://pngimage.net/wp-content/uploads/2018/05/bomba-png-4.png) left top no-repeat !important;
+    background-size: cover !important;
+    background-color: #adff2f63 !important;
+}
+.clicado{
+    cursor: default !important; 
+    border: 2px inset;
+    background-color: #adff2f63;
+}
+fieldset.scheduler-border {
+    border: 1px groove #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+    box-shadow:  0px 0px 0px 0px #000;
+    border-radius: 7px;
+}
+legend.scheduler-border {
+    width:inherit; /* Or auto */
+    padding:0 10px; /* To give a bit of padding on the left and right */
+    border-bottom:none;
+}
