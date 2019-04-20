@@ -4,8 +4,7 @@ var vm = new Vue({
         tamanho: 0,
         campo: {},
         qtdBombas: 0,
-        tempLinha: 0,
-        tempColuna: 0
+        dificuldade: ''
     },
     computed: {
 
@@ -142,6 +141,7 @@ function verificar(linha, coluna) {
             return false;
         } else {
             vm.campo[linha][coluna].clicado = 'S';
+            $('[linha=' + linha + '][coluna=' + coluna + ']').addClass('clicado');
             if (vm.campo[linha][coluna].bombaLado === 0) {
                 $('[linha=' + linha + '][coluna=' + coluna + ']').addClass('agua');
                 var obj = vm.varrerAoRedor(linha, coluna);
