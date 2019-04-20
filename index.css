@@ -5,6 +5,16 @@ td{
     text-align: center;
     cursor: pointer;
     background-color: greenyellow;
+    font-weight: bold
+}
+td[bomba-ao-redor='2']{
+    color: blue;
+}
+td[bomba-ao-redor='3']{
+    color: orange;
+}
+td[bomba-ao-redor='4'], td[bomba-ao-redor='5'], td[bomba-ao-redor='6']{
+    color: red;
 }
 .agua{
     background-color: #00bbff !important;
