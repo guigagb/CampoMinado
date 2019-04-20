@@ -36,7 +36,8 @@
             </div>
             <table id="pnJogo">
                 <tr v-for="(linha,index) in campo">
-                    <td v-for="(coluna,index2) in linha" v-bind:linha='index' v-bind:coluna='index2' @click='verificar(index,index2)'></td>
+                    <td v-for="(coluna,index2) in linha" v-bind:linha='index' v-bind:coluna='index2' @click='verificar(index,index2)'>
+                    </td>
                     </div>
                 </tr>
             </table>
